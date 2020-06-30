@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ss-v2ray
+  labels:
+    app: ss-v2ray
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ss-v2ray
+  template:
+    metadata:
+      labels:
+        app: ss-v2ray
+    spec:
+      containers:
+      - env:
+        - name: SSIP
+          value: 47.75.195.118
+        - name: SSLOCALPORT
+          value: "3389"
+        - name: SSPORT
+          value: "443"
+        name: ss-v2ray 
+        image: registry.cn-hangzhou.aliyuncs.com/link-cloud/ss-v2ray:v1.0.0 
+        ports:
+        - name: http
+          containerPort: 1086
+          protocol: TCP
